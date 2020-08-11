@@ -1,0 +1,14 @@
+{% extends "tasks/layout.html" %}
+
+{% block body %}
+    <h1>Add Task</h1>
+    <form action="{% url 'tasks:add' %}" method="post">
+        <!-- csrf token neccessary for forms -->
+        {% csrf_token %}
+        
+        {{ form }}
+        <input type="submit">
+    </form>
+    <!-- To prevent namespace collision, specify the index route in task app -->
+    <a href="{% url 'tasks:index' %}">View All Tasks</a>
+{% endblock %}

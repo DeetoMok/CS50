@@ -1,0 +1,111 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {% if not is_open %}
+        {% if highest_bidder == creator %}
+    <div class="alert alert-warning" role="alert">
+        This auction is closed, with no successful bidder.
+    </div>
+        {% else %}
+    <div class="alert alert-success" role="alert">
+        Congratulations, {{ highest_bidder }} has won the auction at ${{ bid }}
+    </div>
+        {% endif %}
+    {% endif %}    
+    {% if is_watch %}
+    <a class="btn btn-primary" href="{% url 'unwatch' title %}" role="button">Unwatch this Listing</a> <br>
+    {% else %}
+    <a class="btn btn-primary" href="{% url 'watch' title %}" role="button">Watch this Listing</a> <br>
+    {% endif %}
+    <img src="{{ url }}" height="200px" width="auto">
+    <h2>{{ title }}</h2>
+    <div>
+        <h3>Category: {{ category }}</h3> <hr>
+    </div>
+    <div>
+        Creator: {{ creator }}<br>
+        Starting Bid Price: <strong>$ {{ start_bid }}</strong><hr>
+        {% if highest_bidder == creator %}
+        Highest Bidder: -<br>
+        {% else %}
+        Highest Bidder: {{ highest_bidder }}<br>
+        {% endif %}
+        Current Bid Price: <strong>$ {{ bid }}</strong><hr>
+    </div>
+    <div>
+        
+        <h3>Description</h3>
+        <p>{{ description }}</p>
+    </div>
+    {% if is_creator %}
+        {% if not is_open %}
+    <div>
+        <a class="btn btn-secondary btn-lg" href="{% url 'close_listing' title %}" role="button" disabled>Close this Listing</a>
+    </div>
+        {% else %}    
+    <div>
+        <a class="btn btn-success" href="{% url 'close_listing' title %}" role="button">Close this Listing</a>
+    </div>
+        {% endif %} 
+    {% else %}
+    <div>
+        {% if not higher_bid %}
+        <p style="color: red;">{{ failed_bid }}</p>
+        {% endif %}
+        {% if not is_open %}
+        <form action="{% url 'bid' title %}" method="post" disabled>
+            {% csrf_token %}
+            <div class="form-group">
+                <input class="form-control" type="number" name="bid" placeholder="Your Bid" disabled>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Bid" disabled>
+        </form>
+        {% else %}
+        <form action="{% url 'bid' title %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input class="form-control" type="number" name="bid" placeholder="Your Bid" required>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Bid">
+        </form>
+        <hr>
+        {% endif %}
+    </div>
+    {% endif %}
+    <div>
+        <h3>Comment Section</h3>
+        <table class="table table-borderless">
+            <tbody>
+                {% for comment in comments %}
+                    <tr>
+                        <td>
+                            <strong>{{ comment.comment_user }}</strong>: {{ comment.text }}
+                        </td>
+                    </tr>
+                {% empty %}
+                    No Comments
+                {% endfor %} 
+            </tbody>
+        </table>
+        {% if is_open %}
+        <form action="{% url 'comment' title %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input class="form-control" type="text" name="comment" placeholder="Comments...">
+                <input class="btn btn-primary" type="submit" value="Comment">
+                <input class="btn btn-primary" type="reset" value="Cancel">
+            </div>
+        </form>
+        {% else %}
+        <form action="{% url 'comment' title %}" method="post" disabled>
+            {% csrf_token %}
+            <div class="form-group">
+                <input class="form-control" type="text" name="comment" placeholder="Comments..." disabled>
+                <input class="btn btn-primary" type="submit" value="Comment" disabled>
+                <input class="btn btn-primary" type="reset" value="Cancel" disabled>
+            </div>
+        </form>
+        {% endif %}  
+
+    </div>
+{% endblock %}

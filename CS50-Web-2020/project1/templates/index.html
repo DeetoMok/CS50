@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    Login Page
+{% endblock %}
+
+{% block body %}
+    <h1>Hello, and welcome to BookRev</h1>
+    Sign in
+    <form action="{{ url_for('login') }}" method="post">
+        <input type="text" name="name" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <button>Submit</button>
+    </form>
+
+    <div style="margin-top: 10px;">
+        Don't have an account?<br>
+        <a href="{{ url_for('create') }}" alt="Create account">Create Account</a>
+    </div>
+    
+{% endblock %}

@@ -1,0 +1,63 @@
+%mainColor {
+    color: #4acaa8;
+}
+
+html {
+    margin: auto 5em;
+}
+
+#main  {
+    color: #777;
+}
+
+#one {
+    p {
+        color: black;
+    }
+    
+}
+
+.navbar-brand {
+    @extend %mainColor;
+}
+
+.container {
+    h1{
+        @extend %mainColor;
+    }
+}
+
+.container {
+    P{
+        color: black;
+    }
+}
+
+.container {
+    .row{
+        display: flex;
+    flex-wrap: wrap;
+    }
+}
+
+.img-fluid {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 30rem;
+    max-width: 60rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width: 800px) {
+    h1::before {
+        content: "Hello, world! My name is Daryl";
+    }
+}
+
+@media (max-width: 799px) {
+    h1::before {
+        content: "My name is Daryl";
+    }
+}

@@ -1,0 +1,26 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Watchlist</h2>
+
+    <table class="table">
+        <tbody>
+            {% for auction in auctions %}
+                <tr>
+                    <td>
+                        <a href="{% url 'listing' auction.id %}"><h3>{{ auction.title }}</h3></a>
+                        {{ auction.url }}</br>
+                        <strong>Bid Price: {{ auction.start_bid }}</strong>
+                    </td>
+                    <td>
+                        <strong>{{ auction.category }}</strong><br>
+                        {{ auction.description }}
+                    </td>
+                </tr>
+            {% empty %}
+                Your Watchlist is empty
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

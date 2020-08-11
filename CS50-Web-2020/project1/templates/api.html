@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    API Access
+{% endblock %}
+
+{% block body %}
+    This website API allows developers to access the data stored in this website. </br>
+    simply make a GET request to this website's /api/&lt;isbn&gt; route, where &lt;isbn&gt; is an ISBN number.
+    A JSON response will be returned containing the book’s title, author, publication date, ISBN number, review count, and average score in the format as shown. </br>
+    <code>
+        { </br>
+            "title": "Memory",</br>
+            "author": "Doug Lloyd",</br>
+            "year": 2015,</br>
+            "isbn": "1632168146",</br>
+            "review_count": 28,</br>
+            "average_score": 5.0</br>
+        }</br>
+    </code>
+{% endblock %}

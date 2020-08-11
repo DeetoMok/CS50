@@ -1,0 +1,70 @@
+
+/* must use at least five different CSS properties, 
+and at least five different types of CSS selectors 
+
+at least one mobile-responsive @media query, 
+such that something about the styling changes for smaller screens.*/
+html {
+    margin: auto 5em;
+}
+
+#main  {
+    color: #777;
+}
+
+#one > p {
+    color: black;
+}
+
+.navbar-brand {
+    color: #4acaa8;
+}
+
+.container > h1 {
+    color: #4acaa8;
+}
+
+.container > p {
+    color: black;
+}
+
+.img-fluid {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 30rem;
+    max-width: 60rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button {
+    background-color: #4acaa8;
+    padding: 16px 8px;
+    border-radius: 8px;
+    color: black;
+}
+
+.mail {
+    color: #4acaa8;
+}
+
+.mail:hover {
+   color: yellowgreen; 
+}
+
+.mail:visited {
+    color: blue;
+}
+
+@media (min-width: 800px) {
+    h1::before {
+        content: "Contact me";
+    }
+}
+
+@media (max-width: 799px) {
+    h1::before {
+        content: "Contact me :)";
+    }
+}

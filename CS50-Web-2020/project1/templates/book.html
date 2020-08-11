@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+Title: {{ book.title }}</br>
+{% endblock %}
+
+{% block body %}
+Details:
+
+    <div>
+        <ul>
+            <li>ISBN No: {{ book.isbn }}</li>
+            <li>Author: {{ book.author }}</li> 
+            <li>Year: {{ book.year }}</li>
+        </ul>
+    </div>
+    
+    <div id='API_Data'>
+        Rating: {{ rating }}/5</br>
+        Number of Ratings: {{ ratingCounts }}</br>
+        Number of Reviews on Goodreads: {{ reviewCounts }}</br>
+    </div>
+
+    <div id='display-review'>
+    </br>
+        <h2> Reviews: </h2>
+        {% for review in reviewInfo %}
+    </hr>
+           ({{ review.review_score }}/5) {{ review.username}}: {{ review.review_text}}</br>
+    </hr>
+        {% endfor %}
+    </div>
+
+
+    {% if not reviewed_book %}
+    <div id='review'>
+        <form action="{{ url_for('review', book_id=book.id) }}" method="post" style="margin-top: 10px;">
+            <select class="form-control" id="exampleFormControlSelect1" name="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </br>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="review"  id="text_area" required placeholder="Review.."></textarea>
+        </br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    {% else %}
+    <div id='review'>
+        <form action="{{ url_for('review', book_id=book.id) }}" method="post" style="margin-top: 10px;">
+            <select class="form-control" id="exampleFormControlSelect1" name="rating" disabled>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </br>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="review"  id="text_area" required placeholder="Review.." disabled></textarea>
+        </br>
+            <input type="submit" value="Submit" disabled>
+        </form>
+    </div>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    Hello {{ username }}, your account has been created!
+{% endblock %}
+
+{% block body %}
+    <table style="width:100%">
+        <tr> 
+            <th>Data Field</th>
+            <th>Input</th>
+        </tr>
+        <tr>
+            <td>First Name</td>
+            <td>{{ firstName }}</td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td>{{ lastName }}</td>
+        </tr>
+        <tr>
+            <td>Username</td>
+            <td>{{ username }}</td>
+        </tr> 
+        <tr>
+            <td>Email Address</td>
+            <td>{{ email }}</td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>{{ password }}</td>
+        </tr>
+
+    </table>
+    <form action="{{ url_for('index') }}" method="get">
+        <button>Confirm</button>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Inactive Listings</h2>
+
+    <table class="table">
+        <tbody>
+            {% for auction in auctions %}
+                <tr>
+                    <td>
+                        <a href="{% url 'listing' auction.id %}"><h3>{{ auction.title }}</h3></a>
+                        <img src="{{ auction.url }}" height="100px" width="auto"></br>
+                        <strong>Creator: {{ auction.creator }}</strong></br>
+                        <strong>Starting Bid Price: {{ auction.start_bid }}</strong>
+                    </td>
+                    <td>
+                        <strong>{{ auction.category }}</strong><br>
+                        {{ auction.description }}
+                    </td>
+                </tr>
+            {% empty %}
+                No Active Listings
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

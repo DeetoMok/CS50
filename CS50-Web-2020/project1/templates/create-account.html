@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    New User Page
+{% endblock %}
+
+{% block body %}
+    <h1>Create New Account</h1>
+    <form action="{{ url_for('confirm') }}" method="post" style="margin-top: 10px;">
+        <input type="text" name="first-name" required placeholder="First Name" style="margin-top: 10px;"><br>
+        <input type="text" name="last-name" required placeholder="Last Name" style="margin-top: 10px;"><br>
+        <input type="email" name="email" required placeholder="Email" pattern=".+@.+.com" title="Please enter a valid email address" style="margin-top: 10px;"><br>
+        <input type="text" name="username" required placeholder="Username" style="margin-top: 10px;"><br>
+        <input type="password" name="password" required placeholder="Password" style="margin-top: 10px;"><br>
+        <input type="password" name="confirm-password" required placeholder="Confirm Password" style="margin-top: 10px;"><br>
+        {{ errorMessage }}
+    </br>
+        <input type="reset">
+        <input type="submit" value="Submit">
+        <!-- <input type="button" href="login.html" value="Back"> -->
+        <!-- <a href="login.html">Back</a> -->
+    </form>
+    
+{% endblock %}

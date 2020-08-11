@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    Hello {{ name }}
+{% endblock %}
+
+{% block body %}
+    Welcome to BookRev, where you will be able to search for book reviews and make your own reviews on books.
+
+    <div>
+        This is a book review .....
+    </div>
+
+    Hit the Search button to get straight to looking for your favourite books!
+    <form action="{{ url_for('search') }}" method="get">
+        <button type="submit">Search</button>
+    </form>
+
+
+{% endblock %}

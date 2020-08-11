@@ -1,0 +1,15 @@
+{% extends "tasks/layout.html" %}
+
+{% block body %}
+    <h1>Tasks</h1>
+    <ul>
+        {% for task in tasks %}
+            <li>{{ task }}</li>
+        <!-- when we have a for loop, we can create an empty condition -->
+        {% empty %}
+            <li>No tasks.</li>
+        {% endfor %}
+    </ul>
+    <!-- the name of add in urls.py -->
+    <a href="{% url 'tasks:add' %}">Add New Task</a>
+{% endblock %}

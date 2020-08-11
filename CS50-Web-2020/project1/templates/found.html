@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    Results
+{% endblock %}
+
+{% block body %}
+{{ search }}
+
+    <div class="form-group">
+        <ul>
+            
+            {% for book in books %}
+            <li>
+                    Title: {{ book.title }}</br>
+                    ISBN No: {{ book.isbn }}</br>
+                    Author: {{ book.author }}</br>
+                    Year: {{ book.year }} </br>
+                    <a href="{{ url_for('book', isbn_no=book.isbn) }}">Link</a>
+                
+            </li>
+            {% endfor %}
+            
+        </ul>
+
+
+    </div>
+    
+
+{% endblock %}
