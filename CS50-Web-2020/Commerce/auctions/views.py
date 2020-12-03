@@ -83,7 +83,7 @@ def create(request):
         auction_entry.save()
         list_id = Auction.objects.get(title=title).id
         start_bid = Bid(auction=auction_entry, bidder=user, bid=bid)
-        start_bid.save()        
+        start_bid.save()
         return HttpResponseRedirect(reverse("listing", args=(list_id,)))     
     else:
         return render(request, "auctions/create.html")

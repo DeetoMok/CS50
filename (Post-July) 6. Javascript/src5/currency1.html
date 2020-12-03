@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>Currency</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // when submit, run the code to fetch data
+            document.querySelector('form').onsubmit = function() {
+                fetch("https://api.exchangeratesapi.io/latest?base=USD")
+                .then(response => response.json())
+                .then(data => {
+                    // get the value from the form of id currency
+                    const currency = document.querySelector('#currency').value.toUpperCase();
+                    const rate = data.rates[currency];
+                    if (rate !== undefined) {
+                        const result = `1 USD is equal to ${rate.toFixed(3)} ${currency}`;
+                        // update result's innerHTML value
+                        document.querySelector('#result').innerHTML = result;
+                    } else {
+                        document.querySelector('#result').innerHTML = 'Invalid currency.';
+                    }
+                })
+                // when using then... then... good to add catch to catch error
+                .catch(error => {
+                    console.log('Error:', error);
+                });
+                return false;
+            }
+        });
+    </script>
+    <body>
+        <form>
+            <input id="currency" placeholder="Currency">
+            <input type="submit" value="Convert">
+        </form>
+        <div id="result">
+        </div>
+    </body>
+</html>
